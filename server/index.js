@@ -51,6 +51,11 @@ const sendEmail = async (to, subject, text) => {
 // Урилгуудыг санах ойд хадгална
 const invitations = {};
 
+// Үндсэн route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
+
 // Урилга үүсгэх
 app.post('/api/invitations', (req, res) => {
   const { location, date, time, tableNumber, guestName, hostName, message, email } = req.body;
