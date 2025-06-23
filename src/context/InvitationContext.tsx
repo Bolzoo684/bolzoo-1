@@ -25,7 +25,9 @@ const InvitationContext = createContext<InvitationContextType | undefined>(undef
 
 export function InvitationProvider({ children }: { children: React.ReactNode }) {
   // Backend API url
-  const API_URL = 'http://localhost:4000/api/invitations';
+  const API_URL = process.env.NODE_ENV === 'production'
+    ? 'https://bolziy.onrender.com/api/invitations'
+    : 'http://localhost:4000/api/invitations';
 
   // Урилга үүсгэх
   const addInvitation = async (invitationData: Omit<Invitation, 'id' | 'createdAt'>): Promise<string> => {
