@@ -3,12 +3,20 @@ import cors from 'cors';
 import { v4 as uuidv4 } from 'uuid';
 import nodemailer from 'nodemailer';
 import 'dotenv/config';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 4000;
 
 app.use(cors());
 app.use(express.json());
+
+// Vite-аар build хийсэн React аппын static файлуудыг хүргэх
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Email илгээх тохиргоо
 const transporter = nodemailer.createTransport({
@@ -97,6 +105,11 @@ app.post('/api/invitations/:id/response', async (req, res) => {
   }
   
   res.json({ success: true, response });
+});
+
+// API-д таараагүй бусад бүх route-д React аппыг буцаах
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
 });
 
 app.listen(port, () => {
