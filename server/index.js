@@ -29,6 +29,9 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+console.log('SMTP_USER:', process.env.SMTP_USER);
+console.log('SMTP_PASS:', process.env.SMTP_PASS ? '******' : 'NOT SET');
+
 const sendEmail = async (to, subject, text) => {
   try {
     if (!to) {
