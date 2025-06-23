@@ -26,7 +26,7 @@ const InvitationContext = createContext<InvitationContextType | undefined>(undef
 export function InvitationProvider({ children }: { children: React.ReactNode }) {
   // Backend API url-ийг production болон development орчинд тохируулах
   const API_BASE_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://bolziy.onrender.com' 
+    ? 'https://bolziy.com' 
     : 'http://localhost:4000';
     
   const API_URL = `${API_BASE_URL}/api/invitations`;
