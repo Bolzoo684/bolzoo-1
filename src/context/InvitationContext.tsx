@@ -24,12 +24,8 @@ interface InvitationContextType {
 const InvitationContext = createContext<InvitationContextType | undefined>(undefined);
 
 export function InvitationProvider({ children }: { children: React.ReactNode }) {
-  // Backend API url-ийг production болон development орчинд тохируулах
-  const API_BASE_URL = process.env.NODE_ENV === 'production' 
-    ? 'https://bolziy.com' 
-    : 'http://localhost:4000';
-    
-  const API_URL = `${API_BASE_URL}/api/invitations`;
+  // Backend API url
+  const API_URL = 'http://localhost:4000/api/invitations';
 
   // Урилга үүсгэх
   const addInvitation = async (invitationData: Omit<Invitation, 'id' | 'createdAt'>): Promise<string> => {
